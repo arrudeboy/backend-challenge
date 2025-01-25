@@ -9,12 +9,15 @@
 ### functional requirements
 
  - **_Perform a calc with a dynamic percentage_**: given two numbers (`num1` and `num2`) sum both and then apply an addition with a percentage of this sum result. Example: `num1=5`, `num2=5`, `percentage=10%` => **`(5 + 5) + 10% = 11`**.
+
     > The percentage value must be retrieved from an external service (might be a mocked service)
+
  - **_Save all client calls data for future querying_**: each client call entry must save the following information:
    - `Date and time`
    - `Invoked endpoint`
    - `Received parameters`
    - `Response (either successful or failure)`
+
    > The call history querying must support pagination
    
 ### non-functional requirements
