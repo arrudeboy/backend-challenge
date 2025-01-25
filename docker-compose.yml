@@ -1,0 +1,44 @@
+networks:
+  backend-challenge-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  call-history-db:
+    container_name: call-history-db
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgres/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: call-history-db
+    ports:
+      - 5432:5432
+    networks:
+      - backend-challenge-network
+
+  backend-challenge-api:
+    container_name: backend-challenge-api
+    build: ./
+    ports:
+      - 8080:8080
+    restart: on-failure
+    depends_on:
+      - call-history-db
+    links:
+      - call-history-db
+    networks:
+      - backend-challenge-network
+
+  percentage-external-service:
+    container_name: percentage-external-service
+    build: ./percentage-external-service
+    ports:
+      - 8001:8001
+    restart: on-failure
+    networks:
+      - backend-challenge-network
