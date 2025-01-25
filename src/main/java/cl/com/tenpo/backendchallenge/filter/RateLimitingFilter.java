@@ -22,7 +22,7 @@ public class RateLimitingFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RateLimitingFilter.class);
 
-    private static final long THIRTY_MINUTES_IN_MILLIS = 2 * 60 * 1000;
+    private static final long THIRTY_MINUTES_IN_MILLIS = 30 * 60 * 1000;
 
     private final Map<String, MaxRequestsPerMinuteTrack> requestCountsPerIpAddress = new ConcurrentHashMap<>();
 
@@ -49,7 +49,7 @@ public class RateLimitingFilter implements Filter {
         filterChain.doFilter(request, response);
     }
 
-    @Scheduled(fixedRate = 2, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedRate = 30, timeUnit = TimeUnit.MINUTES)
     public void resetRequestCounts() {
         long currentTime = System.currentTimeMillis();
         requestCountsPerIpAddress.entrySet()

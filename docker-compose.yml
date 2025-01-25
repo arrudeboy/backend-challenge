@@ -16,13 +16,14 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: call-history-db
+      PGPORT: 5432
     ports:
       - 5432:5432
     networks:
       - backend-challenge-network
 
-  backend-challenge-api:
-    container_name: backend-challenge-api
+  calc-api:
+    container_name: calc-api
     build: ./
     ports:
       - 8080:8080
