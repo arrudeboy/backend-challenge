@@ -11,6 +11,7 @@ import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import java.net.http.HttpClient;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
@@ -37,6 +38,11 @@ public class BackendChallengeApplication {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         return mapper;
+    }
+
+    @Bean
+    public HttpClient httpClient() {
+        return HttpClient.newHttpClient();
     }
 
 }

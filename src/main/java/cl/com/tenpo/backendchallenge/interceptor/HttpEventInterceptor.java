@@ -72,7 +72,7 @@ public class HttpEventInterceptor {
 
     private Optional<String> convertObjectToJson(Object object) {
         try {
-            return Optional.of(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object));
+            return Optional.of(objectMapper.writeValueAsString(object));
         } catch (JsonProcessingException e) {
             LOGGER.error("Error serializing object to JSON", e);
             return Optional.empty();

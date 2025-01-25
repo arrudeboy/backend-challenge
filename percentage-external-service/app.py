@@ -2,15 +2,21 @@ from fastapi import FastAPI
 
 from pydantic import BaseModel
 
+db = {"percentage": 10}
 
-class Output(BaseModel):
+class PercentageDTO(BaseModel):
     percentage: float
 
 
 app = FastAPI()
 
 
-@app.get("/", response_model=Output)
-def percentage():
-    percentage = 30 # fixed value for testing purpose
-    return Output(percentage=percentage)
+@app.get("/", response_model=PercentageDTO)
+def get_percentage():
+    return PercentageDTO(percentage=db["percentage"])
+
+
+@app.put("/", response_model=PercentageDTO)
+def update_percentage(percentage_dto: PercentageDTO):
+    db["percentage"] = percentage_dto.percentage
+    return PercentageDTO(percentage=db["percentage"])
