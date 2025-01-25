@@ -17,9 +17,8 @@
    - `Invoked endpoint`
    - `Received parameters`
    - `Response (either successful or failure)`
-
+   <br></br>
    > The call history querying must support pagination
-   
 ### non-functional requirements
 
  - **_Cache_**: store the percentage value with a **`ttl`** of **30 minutes**
