@@ -1,6 +1,6 @@
 # backend-challenge
 
-> This challenge involves the creation of a simple 'microservices' architecture as described in the following diagram:
+> This challenge is about 'microservices' architecture and the following diagram describes the interaction between the underlying components:
 
 ![img](https://i.imgur.com/egbhzYG.png)
 
@@ -63,7 +63,7 @@ On the project main directory run the following command to deploy all the contai
 docker compose up -d
 ```
 
-Check that all containers have been deployed correctly by running the following command:
+Check that all the containers have been deployed correctly by running the following command:
 ```
 docker ps
 ```
@@ -78,3 +78,14 @@ docker ps
 
 Import this [postman collection](tenpo-backend-challenge.postman_collection.json) in order to start testing the REST API endpoints.
 There are also extra requests in this collection to interact with the percentage-external-service
+
+#### swagger 
+
+> :exclamation: :collision: Unexpected behaviour is taking place with spring boot 3 and swagger, thus it leads the fact that the documentation cannot be displayed at common urls (http://localhost:8080/swagger-ui.html or http://localhost:8080/swagger-ui/index.html). A 404 response is returned when trying access these urls.
+
+## final thoughts
+
+The challenge was fine. Some requirements, specifically the technical ones were too generic and vague. I decided not to use Webflux, and instead I opted to use Virtual Thread support on Spring Boot regarding the fact that it is a final feature in Java 21. In my opinion, reactive programming is not needed nowadays in mostly common scenarios and if you ask for performance, high-conconcurrency and scalability in Java, might be it's time to delve into [Project Loom](https://openjdk.org/projects/loom/).
+
+Speaking about distributed cache with Redis, I did it in the past in other projects by using common libraries like Jedis, but due to lack of time I could not implement it. Anyways, I consider that an unnecessary feature regards the challenge scope.
+Going to a kubernetes environment is another story, and again I think that it is out the scope of this challenge.
